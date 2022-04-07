@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>io.djay</groupId>
 	<artifactId>course-api-data</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>course-api-data</name>
 	<description>Course API with data</description>
 	<properties>
