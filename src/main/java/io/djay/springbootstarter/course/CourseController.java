@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.djay.springbootstarter.topic.Topic;
+
 @RestController
-@RequestMapping("/api/v1/courses")
+@RequestMapping("/api/v1/topics")
 @CrossOrigin("*")
 public class CourseController {
 
@@ -23,31 +25,33 @@ public class CourseController {
 	private CourseService courseService;
 
 //	@RequestMapping("/courses")
-    @GetMapping
-	public List<Course> getAllCourses() {
-		return courseService.getAllCourses();
+	@GetMapping("/{id}/courses")
+	public List<Course> getAllCourses(@PathVariable String id) {
+		return courseService.getAllCourses(id);
 	}
 
 //	@RequestMapping("/courses/{id}")
-    @GetMapping("/{id}")
+	@GetMapping("/{topicId}courses/{id}")
 	public Course getCourse(@PathVariable String id) {
 		return courseService.getCourse(id);
 	}
 
 //	@RequestMapping(method = RequestMethod.POST, value = "/courses")
-    @PostMapping
-    public void addCourse(@RequestBody Course course) {
+	@PostMapping("/{topicId}/courses")
+	public void addCourse(@RequestBody Course course, @PathVariable String topicId) {
+		course.setTopic(new Topic(topicId, "", ""));
 		courseService.addCourse(course);
 	}
 
 //	@RequestMapping(method = RequestMethod.PUT, value = "/courses/{id}")
-    @PutMapping("/{id}")
-	public void updateCourse(@RequestBody Course course, @PathVariable String id) {
-		courseService.updateCourse(id, course);
+	@PutMapping("/{topicId}/courses/{id}")
+	public void updateCourse(@RequestBody Course course, @PathVariable String topicId, @PathVariable String id) {
+		course.setTopic(new Topic(topicId, "", ""));
+		courseService.updateCourse(course);
 	}
-	
+
 //	@RequestMapping(method = RequestMethod.DELETE, value = "/courses/{id}")
-    @DeleteMapping("/{id}")
+	@DeleteMapping("/{topicId}/courses/{id}")
 	public void deleteCourse(@PathVariable String id) {
 		courseService.deleteCourse(id);
 	}

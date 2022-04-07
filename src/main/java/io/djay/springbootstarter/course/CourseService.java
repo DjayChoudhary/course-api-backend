@@ -43,10 +43,11 @@ public class CourseService {
 //					new Course("java", "Core Java", "Core Java Description"),
 //					new Course("javascript", "JavaScript", "JavaScript Description")));
 
-	public List<Course> getAllCourses() {
+	public List<Course> getAllCourses(String topicId) {
 		// return courses;
 		List<Course> courses = new ArrayList<>();
-		courseRepository.findAll().forEach(courses::add);	
+		courseRepository.findByTopicId(topicId)
+		.forEach(courses::add);	
 		
 		return courses;
 	}
@@ -62,7 +63,7 @@ public class CourseService {
 		courseRepository.save(course);
 	}
 
-	public void updateCourse(String id, Course course) {
+	public void updateCourse(Course course) {
 //		for (int i = 0; i < courses.size(); i++) {
 //			if (courses.get(i).getId().equals(id)) {
 //				courses.set(i, course);
