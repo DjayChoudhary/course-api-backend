@@ -31,7 +31,7 @@ public class CourseController {
 	}
 
 //	@RequestMapping("/courses/{id}")
-	@GetMapping("/{topicId}courses/{id}")
+	@GetMapping("/{topicId}/courses/{id}")
 	public Course getCourse(@PathVariable String id) {
 		return courseService.getCourse(id);
 	}
